@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The Official Portal of KFS College of Artificial Intelligence - The First in MENA.">
+    
+    <title>THE ROYAL LEGACY | KFS COLLEGE OF AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================================================================
+        2. DESIGN SYSTEM (CSS VARIABLES)
+        ================================================================
+        */
+        :root {
+            /* --- DARK THEME (ROYAL NAVY - CORRECTED) --- */
+            
+            /* Backgrounds (The Abyss & The Ocean) */
+            --bg-body: #020c1b;       /* Deepest Navy */
+            --bg-panel: #0a192f;      /* Lighter Navy Panel */
+            --bg-card: #112240;       /* Sapphire Navy Card */
+            --bg-glass: rgba(2, 12, 27, 0.95);
+            --bg-overlay: rgba(2, 12, 27, 0.85);
+            
+            /* Text Colors */
+            --text-primary: #e6f1ff;  /* Ice White */
+            --text-secondary: #8892b0;/* Slate Blue */
+            --text-muted: #a8b2d1;    /* Muted Slate */
+            
+            /* The Gold Palette (Luxury Accents) */
+            --gold-primary: #cfa75e;
+            --gold-hover: #ffd700;
+            --gold-dim: rgba(207, 167, 94, 0.15);
+            --gold-border: rgba(207, 167, 94, 0.3);
+            
+            /* Shadows & Effects */
+            --shadow-card: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            --shadow-hover: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+            --glow-gold: 0 0 20px rgba(207, 167, 94, 0.2);
+            
+            /* Typography */
+            --font-display: 'Cinzel Decorative', cursive;
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-ui: 'Montserrat', sans-serif;
+            
+            /* Transitions (The "Heavy Luxury" Curve) */
+            --ease-royal: cubic-bezier(0.23, 1, 0.32, 1);
+            --trans-fast: 0.3s ease;
+            --trans-slow: 0.8s var(--ease-royal);
+        }
+
+        /* --- LIGHT THEME (ROYAL CREAM) --- */
+        [data-theme="light"] {
+            --bg-body: #f4f1ea;       /* Creamy Paper */
+            --bg-panel: #e8e4db;      /* Darker Cream */
+            --bg-card: #ffffff;       /* Pure White Card */
+            --bg-glass: rgba(244, 241, 234, 0.95);
+            --bg-overlay: rgba(244, 241, 234, 0.9);
+            
+            --text-primary: #0a192f;  /* Navy Text */
+            --text-secondary: #4a5568;/* Slate Grey */
+            --text-muted: #718096;    
+            
+            --gold-primary: #b8860b;  /* Darker Gold */
+            --gold-hover: #d4af37;
+            --gold-dim: rgba(184, 134, 11, 0.1);
+            --gold-border: rgba(184, 134, 11, 0.25);
+            
+            --shadow-card: 0 10px 30px -15px rgba(184, 134, 11, 0.15);
+            --shadow-hover: 0 20px 30px -15px rgba(184, 134, 11, 0.2);
+        }
+
+        /* ================================================================
+        3. GLOBAL RESET & BASE STYLES
+        ================================================================
+        */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            overflow-x: hidden;
+            transition: background-color 1s var(--ease-royal), color 1s var(--ease-royal);
+        }
+
+        /* Luxurious Noise Texture */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04; pointer-events: none; z-index: 9999; mix-blend-mode: overlay;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border: 2px solid var(--bg-body);
+            border-radius: 2px;
+        }
+
+        /* Typography Defaults */
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .gold-heading { color: var(--gold-primary); }
+        .font-ui { font-family: var(--font-ui); }
+        
+        a { text-decoration: none; color: inherit; transition: var(--trans-fast); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* ================================================================
+        4. UTILITY COMPONENTS
+        ================================================================
+        */
+        .container { width: 88%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .section-padding { padding: 140px 0; position: relative; }
+        
+        .text-center { text-align: center; }
+        .text-justify { text-align: justify; }
+
+        /* Ornamental Divider */
+        .divider {
+            display: flex; align-items: center; justify-content: center;
+            gap: 20px; margin: 40px auto; opacity: 0.6; max-width: 500px;
+        }
+        .divider::before, .divider::after {
+            content: ''; height: 1px; width: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+        }
+        .divider i { color: var(--gold-primary); font-size: 1.2rem; transform: rotate(45deg); }
+
+        /* Royal Button */
+        .btn-royal {
+            display: inline-block; padding: 18px 45px;
+            background: transparent; border: 1px solid var(--gold-primary);
+            color: var(--gold-primary); font-family: var(--font-head);
+            font-size: 0.9rem; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; position: relative; overflow: hidden;
+            cursor: pointer; transition: 0.6s var(--ease-royal); z-index: 1;
+        }
+        .btn-royal::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%; background: var(--gold-primary);
+            transition: 0.6s var(--ease-royal); z-index: -1;
+        }
+        .btn-royal:hover { color: var(--bg-body); box-shadow: 0 0 30px var(--gold-dim); }
+        .btn-royal:hover::before { left: 0; }
+
+        /* ================================================================
+        5. PRELOADER
+        ================================================================
+        */
+        #preloader {
+            position: fixed; inset: 0; background-color: #020c1b; z-index: 999999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s var(--ease-royal);
+        }
+        .loader-icon { font-size: 6rem; color: var(--gold-primary); margin-bottom: 25px; animation: pulse 2.5s infinite; }
+        .loader-text {
+            font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 8px;
+            background: linear-gradient(to right, var(--gold-primary), #fff, var(--gold-primary));
+            -webkit-background-clip: text; color: transparent; background-size: 200%;
+            animation: shine 3s infinite linear;
+        }
+        .loader-bar {
+            width: 150px; height: 1px; background: rgba(255,255,255,0.1);
+            margin-top: 30px; position: relative; overflow: hidden;
+        }
+        .loader-progress {
+            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+            background: var(--gold-primary); animation: fill 2s ease-out forwards;
+        }
+
+        /* ================================================================
+        6. NAVBAR
+        ================================================================
+        */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 10000;
+            padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(2, 12, 27, 0.9), transparent);
+            transition: all 0.6s var(--ease-royal);
+        }
+        nav.scrolled {
+            padding: 15px 60px; background: var(--bg-glass); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--gold-border); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand i { font-size: 2.2rem; color: var(--gold-primary); }
+        .brand-text h3 { font-size: 1.4rem; margin: 0; color: var(--text-primary); line-height: 1; }
+        .brand-text span { font-size: 0.7rem; color: var(--gold-primary); letter-spacing: 3px; font-family: var(--font-ui); font-weight: 600; display: block; }
+        
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-family: var(--font-head); font-size: 0.9rem; font-weight: 600;
+            color: var(--text-primary); position: relative; opacity: 0.8; transition: 0.3s;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 50%; width: 0; height: 2px;
+            background: var(--gold-primary); transition: 0.4s var(--ease-royal); transform: translateX(-50%);
+        }
+        .nav-link:hover { opacity: 1; color: var(--gold-primary); }
+        .nav-link:hover::after { width: 100%; }
+
+        .theme-toggle {
+            width: 40px; height: 40px; border: 1px solid var(--gold-primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            background: transparent; color: var(--gold-primary); transition: 0.4s;
+        }
+        .theme-toggle:hover { background: var(--gold-primary); color: var(--bg-body); transform: rotate(180deg); }
+        
+        .btn-nav-login {
+            padding: 10px 30px; border: 1px solid var(--gold-primary); color: var(--gold-primary);
+            font-family: var(--font-head); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px;
+            background: transparent; cursor: pointer; transition: 0.4s;
+        }
+        .btn-nav-login:hover { background: var(--gold-primary); color: var(--bg-body); }
+
+        /* ================================================================
+        7. HERO SECTION
+        ================================================================
+        */
+        .hero {
+            height: 100vh; position: relative; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; text-align: center;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop') center/cover;
+            filter: brightness(0.3) sepia(0.2) contrast(1.1); z-index: -1;
+            animation: panZoom 40s infinite alternate;
+        }
+        .hero-content { z-index: 2; padding: 0 20px; max-width: 1200px; }
+        
+        .hero-badge {
+            display: inline-block; padding: 10px 30px; border: 1px solid var(--gold-primary);
+            color: var(--gold-primary); font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 4px;
+            margin-bottom: 30px; opacity: 0; animation: fadeUp 1s 2.8s forwards;
+        }
+        
+        .hero h1 {
+            font-size: 5rem; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            margin-bottom: 20px; opacity: 0; animation: fadeUp 1s 3.1s forwards;
+        }
+        .hero h1 span {
+            display: block; color: var(--gold-primary); font-size: 2.2rem;
+            letter-spacing: 8px; margin-top: 15px; font-family: var(--font-display);
+        }
+        
+        .hero p {
+            font-size: 1.4rem; color: #cbd5e1; max-width: 800px; margin: 0 auto 50px;
+            font-style: italic; opacity: 0; animation: fadeUp 1s 3.4s forwards;
+        }
+        
+        .scroll-indicator {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0; animation: fadeIn 1s 4s forwards;
+        }
+        .mouse {
+            width: 26px; height: 45px; border: 2px solid var(--gold-primary); border-radius: 15px; position: relative;
+        }
+        .wheel {
+            width: 4px; height: 6px; background: var(--gold-primary); border-radius: 2px;
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        /* ================================================================
+        8. NEWS TICKER
+        ================================================================
+        */
+        .ticker-wrap {
+            background: var(--gold-primary); color: #020c1b; padding: 12px 0;
+            border-top: 2px solid #fff; border-bottom: 2px solid #fff; overflow: hidden;
+            position: relative; z-index: 100;
+        }
+        .ticker { display: flex; white-space: nowrap; animation: ticker 40s linear infinite; }
+        .ticker-item {
+            margin: 0 60px; font-family: var(--font-head); font-weight: 700;
+            display: flex; align-items: center; gap: 10px; font-size: 1rem;
+        }
+
+        /* ================================================================
+        9. HISTORY & LEGACY (PRESIDENT 2019)
+        ================================================================
+        */
+        .legacy-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
+        
+        .legacy-text h2 { font-size: 3.5rem; color: var(--text-primary); }
+        .legacy-text p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 25px; }
+        
+        .decree-box {
+            background: linear-gradient(90deg, var(--gold-dim), transparent);
+            border-left: 4px solid var(--gold-primary); padding: 30px; margin: 40px 0;
+        }
+        .decree-box h4 { font-size: 1.4rem; color: var(--gold-primary); margin-bottom: 10px; }
+        .decree-box p { font-style: italic; font-size: 1.1rem; color: var(--text-primary); margin: 0; }
+        
+        .img-wrapper { position: relative; padding: 25px; border: 1px solid var(--gold-border); }
+        .img-wrapper img { width: 100%; filter: sepia(20%) contrast(1.1); transition: 0.7s; }
+        .img-wrapper:hover img { filter: sepia(0) contrast(1); transform: scale(1.02); }
+        
+        .corner { position: absolute; width: 50px; height: 50px; border: 3px solid var(--gold-primary); transition: 0.5s; }
+        .tl { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+        .br { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+        .img-wrapper:hover .corner { width: 100%; height: 100%; }
+
+        /* ================================================================
+        10. DEAN'S MESSAGE
+        ================================================================
+        */
+        .dean-section { background: var(--bg-panel); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
+        .dean-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
+        
+        .dean-img { position: relative; }
+        .dean-img img {
+            border-radius: 50%; width: 350px; height: 350px; object-fit: cover;
+            border: 4px solid var(--gold-primary); margin: 0 auto; filter: grayscale(30%); transition: 0.5s;
+        }
+        .dean-img:hover img { filter: grayscale(0); box-shadow: 0 0 50px var(--gold-dim); }
+        
+        .signature { font-family: 'Herr Von Muellerhoff', cursive; font-size: 2.5rem; color: var(--gold-primary); margin-top: 30px; }
+
+        /* ================================================================
+        11. STATISTICS (COUNTER UP)
+        ================================================================
+        */
+        .stats-section {
+            background: linear-gradient(rgba(2, 12, 27, 0.9), rgba(2, 12, 27, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            background-attachment: fixed; background-size: cover; color: #fff;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        
+        .stat-item h3 { font-size: 4.5rem; color: var(--gold-primary); margin: 0; line-height: 1; font-family: var(--font-display); }
+        .stat-item p { font-family: var(--font-ui); font-size: 0.9rem; letter-spacing: 3px; margin-top: 15px; color: #a8b2d1; }
+
+        /* ================================================================
+        12. DEPARTMENTS (THE SHIMMER CARDS - NAVY BLUE)
+        ================================================================
+        */
+        .dept-header { text-align: center; max-width: 800px; margin: 0 auto 80px; }
+        .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
+        .dept-card {
+            background-color: var(--bg-card); /* Sapphire Navy */
+            border: 1px solid var(--gold-border); padding: 60px 40px; text-align: center;
+            position: relative; overflow: hidden; cursor: pointer;
+            transition: all 0.8s var(--ease-royal); /* Heavy, Lux Transition */
+        }
+        
+        /* Gold Shimmer Effect */
+        .dept-card::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(207, 167, 94, 0.15), transparent);
+            transform: skewX(-25deg); transition: 1.2s ease-in-out;
+        }
+        .dept-card:hover::before { left: 150%; }
+        
+        .dept-card:hover {
+            transform: translateY(-12px); border-color: var(--gold-primary);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .icon-box {
+            width: 100px; height: 100px; margin: 0 auto 40px; border-radius: 50%;
+            border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: var(--text-muted); transition: 0.6s var(--ease-royal);
+        }
+        .dept-card:hover .icon-box {
+            background: var(--gold-primary); color: var(--bg-body);
+            border-color: var(--gold-primary); transform: rotate(360deg); box-shadow: var(--glow-gold);
+        }
+        
+        .dept-card h3 { font-size: 1.6rem; color: var(--text-primary); transition: 0.4s; }
+        .dept-card:hover h3 { color: var(--gold-primary); }
+        .dept-card p { font-size: 1.1rem; color: var(--text-secondary); transition: 0.4s; }
+        
+        .card-link {
+            display: inline-block; margin-top: 30px; font-family: var(--font-ui);
+            font-size: 0.8rem; letter-spacing: 3px; color: var(--gold-primary);
+            border-bottom: 1px solid transparent; transition: 0.4s; text-transform: uppercase;
+        }
+        .dept-card:hover .card-link { border-bottom-color: var(--gold-primary); letter-spacing: 5px; }
+
+        /* ================================================================
+        13. GALLERY / CAMPUS LIFE
+        ================================================================
+        */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 300px); gap: 20px;
+        }
+        .gallery-item { position: relative; overflow: hidden; border: 1px solid var(--gold-border); cursor: pointer; }
+        .gallery-item:nth-child(1) { grid-row: span 2; }
+        
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.8s var(--ease-royal); filter: grayscale(40%);
+        }
+        .gallery-item:hover img { transform: scale(1.1); filter: grayscale(0); }
+        
+        .gallery-overlay {
+            position: absolute; bottom: -100%; left: 0; width: 100%; padding: 20px;
+            background: linear-gradient(to top, var(--bg-body), transparent); transition: 0.5s;
+        }
+        .gallery-item:hover .gallery-overlay { bottom: 0; }
+        .gallery-overlay h4 { color: var(--gold-primary); margin: 0; }
+
+        /* ================================================================
+        14. RESEARCH & INNOVATION
+        ================================================================
+        */
+        .research-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .research-card {
+            background: var(--bg-panel); padding: 40px; border-left: 3px solid var(--gold-border); transition: 0.4s;
+        }
+        .research-card:hover {
+            background: var(--bg-card); border-left-color: var(--gold-primary); transform: translateX(10px);
+        }
+        .r-icon { font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 20px; }
+        .research-card h4 { font-size: 1.3rem; margin-bottom: 15px; }
+        .research-card p { font-size: 1rem; color: var(--text-secondary); }
+
+        /* ================================================================
+        15. FAQ SECTION
+        ================================================================
+        */
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--gold-border); margin-bottom: 20px; }
+        .faq-question {
+            padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-head); font-size: 1.2rem; color: var(--text-primary); transition: 0.3s;
+        }
+        .faq-question:hover { color: var(--gold-primary); }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: 0.5s var(--ease-royal);
+            padding: 0 20px; color: var(--text-secondary); font-size: 1rem;
+        }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 20px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--gold-primary); }
+
+        /* ================================================================
+        16. FOOTER
+        ================================================================
+        */
+        footer {
+            background-color: #01050a; padding: 100px 0 30px; text-align: center;
+            border-top: 5px solid var(--gold-primary);
+        }
+        .footer-logo { font-size: 4rem; color: var(--gold-primary); margin-bottom: 20px; opacity: 0.9; }
+        .footer-title { font-size: 2.5rem; color: var(--text-primary); margin-bottom: 10px; }
+        .footer-sub { font-family: var(--font-ui); letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 60px; }
+        
+        .footer-links { display: flex; justify-content: center; gap: 40px; margin-bottom: 60px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-secondary); font-family: var(--font-head); transition: 0.3s; }
+        .footer-links a:hover { color: var(--gold-primary); letter-spacing: 1px; }
+        
+        .copyright {
+            border-top: 1px solid #222; padding-top: 30px; width: 80%; margin: 0 auto;
+            display: flex; justify-content: space-between; color: #555; font-size: 0.9rem;
+        }
+
+        /* ================================================================
+        17. LOGIN MODAL
+        ================================================================
+        */
+        .modal-wrap {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 20000; display: none;
+            justify-content: center; align-items: center; opacity: 0; transition: 0.5s;
+        }
+        .modal-wrap.active { display: flex; opacity: 1; }
+        
+        .modal-card {
+            background: var(--bg-panel); border: 2px solid var(--gold-primary);
+            padding: 60px; width: 500px; position: relative; text-align: center;
+            transform: translateY(50px); transition: 0.5s var(--ease-royal); box-shadow: var(--shadow-hover);
+        }
+        .modal-wrap.active .modal-card { transform: translateY(0); }
+        
+        .modal-close { position: absolute; top: 20px; right: 20px; color: var(--gold-primary); cursor: pointer; font-size: 1.5rem; transition: 0.3s; }
+        .modal-close:hover { transform: rotate(90deg); color: #fff; }
+        
+        .form-input {
+            width: 100%; padding: 15px; margin-bottom: 25px; background: rgba(0,0,0,0.3);
+            border: 1px solid var(--gold-border); color: var(--text-primary);
+            font-family: var(--font-body); font-size: 1.2rem; text-align: center; transition: 0.3s;
+        }
+        .form-input:focus { border-color: var(--gold-primary); background: rgba(0,0,0,0.5); }
+
+        /* Animations */
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(50px); } }
+        @keyframes fadeIn { to { opacity: 1; } from { opacity: 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 30px var(--gold-primary); } }
+        @keyframes shine { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+        @keyframes fill { from { width: 0; } to { width: 100%; } }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        @keyframes scroll { 0% { top: 8px; opacity: 1; } 100% { top: 25px; opacity: 0; } }
+        
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 1s var(--ease-royal); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .legacy-grid, .dean-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .gallery-item:nth-child(1) { grid-row: span 1; }
+            .research-container { grid-template-columns: 1fr; }
+            .modal-card { width: 90%; padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <i class="fa-solid fa-graduation-cap loader-icon"></i>
+        <div class="loader-text">KFS UNIVERSITY</div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item"><i class="fa-solid fa-crown"></i> THE FIRST FACULTY OF ARTIFICIAL INTELLIGENCE IN THE MIDDLE EAST</div>
+            <div class="ticker-item"><i class="fa-solid fa-trophy"></i> INAUGURATED BY THE PRESIDENT 2019</div>
+            <div class="ticker-item"><i class="fa-solid fa-globe"></i> RANKED #1 IN REGIONAL INNOVATION</div>
+            <div class="ticker-item"><i class="fa-solid fa-scroll"></i> ADMISSIONS OPEN FOR 2026</div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <a href="#" class="brand">
+            <i class="fa-solid fa-building-columns"></i>
+            <div class="brand-text">
+                <h3>KFS UNIVERSITY</h3>
+                <span>COLLEGE OF AI</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-link">ESTATE</a></li>
+            <li><a href="#legacy" class="nav-link">HISTORY</a></li>
+            <li><a href="#dean" class="nav-link">DEAN</a></li>
+            <li><a href="#departments" class="nav-link">FACULTIES</a></li>
+            <li><a href="#life" class="nav-link">LIFE</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button></li>
+            <li><button class="btn-nav-login" onclick="toggleLogin()">PORTAL</button></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">EST. 2019 • MENA REGION PIONEER</div>
+            <h1>WHERE TRADITION MEETS<br><span class="gold-heading">ARTIFICIAL INTELLIGENCE</span></h1>
+            <div class="divider" style="animation: fadeIn 1s 3.5s forwards; opacity: 0;"><i class="fa-solid fa-diamond"></i></div>
+            <p>A sovereign institution dedicated to the architecture of the future mind.</p>
+            <div style="opacity: 0; animation: fadeUp 1s 3.8s forwards;">
+                <a href="#departments" class="btn-royal">EXPLORE CURRICULUM</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" style="position: absolute; bottom: 40px; opacity: 0; animation: fadeIn 1s 4s forwards;">
+            <div style="width: 26px; height: 45px; border: 2px solid var(--gold-primary); border-radius: 15px; position: relative;">
+                <div class="loader-progress" style="width: 4px; height: 6px; left: 50%; transform: translateX(-50%); top: 8px; animation: scroll 2s infinite;"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding" id="legacy">
+        <div class="container">
+            <div class="legacy-grid">
+                <div class="legacy-content reveal">
+                    <span class="font-ui gold-heading uppercase" style="font-weight: 600;">A Historic Inauguration</span>
+                    <h2>The First of Its Kind</h2>
+                    <div class="divider" style="justify-content: flex-start;"></div>
+                    <p>In a defining moment for the Middle East's technological sovereignty, the <strong>President of Egypt</strong> officially inaugurated the College of Artificial Intelligence at KFS University in 2019.</p>
+                    <div class="decree-box">
+                        <h4>Presidential Decree No. 101</h4>
+                        <p>"Establishing the pillars of digital transformation for future generations."</p>
+                    </div>
+                </div>
+                <div class="img-wrapper reveal" style="transition-delay: 0.2s;">
+                    <div class="corner tl"></div> <div class="corner br"></div>
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop" alt="University Hall">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding dean-section" id="dean">
+        <div class="container">
+            <div class="dean-grid">
+                <div class="dean-img reveal">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" alt="Dean">
+                </div>
+                <div class="dean-content reveal" style="transition-delay: 0.2s;">
+                    <span class="font-ui gold-heading uppercase">Leadership</span>
+                    <h2>Word from the Dean</h2>
+                    <p class="text-justify">"At KFS College of AI, we do not simply teach code; we teach the philosophy of intelligence. Our curriculum bridges the gap between theoretical mathematics and practical application."</p>
+                    <div class="signature">Ahmed El-Sawy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal"><h3 class="counter" data-target="2019">0</h3><p>FOUNDED</p></div>
+                <div class="stat-item reveal" style="transition-delay: 0.1s;"><h3 class="counter" data-target="1">0</h3><p>RANK IN MENA</p></div>
+                <div class="stat-item reveal" style="transition-delay: 0.2s;"><h3 class="counter" data-target="1500">0</h3><p>ELITE STUDENTS</p></div>
+                <div class="stat-item reveal" style="transition-delay: 0.3s;"><h3 class="counter" data-target="4">0</h3><p>MAJOR PILLARS</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="departments">
+        <div class="container">
+            <div class="dept-header reveal">
+                <span class="font-ui gold-heading uppercase">Academic Pillars</span>
+                <h2>The Royal Departments</h2>
+                <div class="divider"><i class="fa-solid fa-crown"></i></div>
+            </div>
+            <div class="dept-grid">
+                <div class="dept-card reveal">
+                    <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Machine Learning</h3>
+                    <p>Mastering neural networks and deep learning algorithms.</p>
+                    <span class="card-link">View Curriculum</span>
+                </div>
+                <div class="dept-card reveal" style="transition-delay: 0.1s;">
+                    <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
+                    <h3>Robotics</h3>
+                    <p>Kinetic intelligence and autonomous agents.</p>
+                    <span class="card-link">View Curriculum</span>
+                </div>
+                <div class="dept-card reveal" style="transition-delay: 0.2s;">
+                    <div class="icon-box"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3>Cyber Security</h3>
+                    <p>Defending the digital realm through cryptography.</p>
+                    <span class="card-link">View Curriculum</span>
+                </div>
+                <div class="dept-card reveal" style="transition-delay: 0.3s;">
+                    <div class="icon-box"><i class="fa-solid fa-comments"></i></div>
+                    <h3>NLP & Smart Systems</h3>
+                    <p>Bridging human linguistics and machine interpretation.</p>
+                    <span class="card-link">View Curriculum</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding dean-section">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 60px;">
+                <h2>Research & Innovation</h2>
+                <div class="divider"><i class="fa-solid fa-microchip"></i></div>
+            </div>
+            <div class="research-container">
+                <div class="research-card reveal">
+                    <i class="fa-solid fa-flask r-icon"></i>
+                    <h4>Advanced Labs</h4>
+                    <p>State-of-the-art laboratories equipped with the latest GPU clusters.</p>
+                </div>
+                <div class="research-card reveal" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-users r-icon"></i>
+                    <h4>Elite Faculty</h4>
+                    <p>Learn from pioneers shaping national AI strategy.</p>
+                </div>
+                <div class="research-card reveal" style="transition-delay: 0.2s;">
+                    <i class="fa-solid fa-globe r-icon"></i>
+                    <h4>Global Partners</h4>
+                    <p>Strategic alliances with major tech giants.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="life">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 50px;">
+                <span class="font-ui gold-heading uppercase">Campus Life</span>
+                <h2>Inside the Walls</h2>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" alt="Students">
+                    <div class="gallery-overlay"><h4>Projects</h4></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a783?q=80&w=2070&auto=format&fit=crop" alt="Lab">
+                    <div class="gallery-overlay"><h4>Labs</h4></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" alt="Library">
+                    <div class="gallery-overlay"><h4>Library</h4></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop" alt="Campus">
+                    <div class="gallery-overlay"><h4>Grounds</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding dean-section">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 50px;">
+                <h2>Common Inquiries</h2>
+            </div>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">When do admissions close? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Admissions for the Fall semester typically close by late August.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Is the degree internationally accredited? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Yes, our program follows international standards and is accredited.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Are there scholarships available? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">We offer merit-based scholarships for the top 5% of applicants.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <i class="fa-solid fa-scale-balanced footer-logo"></i>
+            <h2 class="footer-title">KFS UNIVERSITY</h2>
+            <p class="footer-sub">College of Artificial Intelligence</p>
+            <div class="footer-links">
+                <a href="#">Admissions</a>
+                <a href="#">Research</a>
+                <a href="#">Faculty</a>
+                <a href="#">Alumni</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="copyright">
+                <span>&copy; 2026 KFS University. All Rights Reserved.</span>
+                <span>Designed with Prestige.</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-wrap" id="loginModal">
+        <div class="modal-card">
+            <i class="fa-solid fa-xmark modal-close" onclick="toggleLogin()"></i>
+            <h2 class="gold-heading">Scholar Portal</h2>
+            <p style="margin-bottom: 40px;">Access the archives.</p>
+            <form onsubmit="event.preventDefault(); attemptLogin();">
+                <input type="text" id="userInput" class="form-input" placeholder="Identity">
+                <input type="password" id="passInput" class="form-input" placeholder="Passcode">
+                <button type="submit" class="btn-royal" style="width:100%">Authenticate</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 1. Preloader
+        window.addEventListener('load', () => setTimeout(() => document.getElementById('preloader').style.transform = 'translateY(-100%)', 2500));
+
+        // 2. Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if(entry.target.classList.contains('stat-item')) startCounters();
+                }
+            });
+        }, {threshold: 0.1});
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 3. Navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        // 4. Counters
+        let counted = false;
+        function startCounters() {
+            if(counted) return;
+            document.querySelectorAll('.counter').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const inc = target / 50;
+                const update = () => {
+                    const c = +counter.innerText;
+                    if(c < target) { counter.innerText = Math.ceil(c + inc); setTimeout(update, 30); }
+                    else counter.innerText = target;
+                };
+                update();
+            });
+            counted = true;
+        }
+
+        // 5. Theme
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.theme-toggle i');
+            if(body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                btn.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // 6. Modal
+        function toggleLogin() { document.getElementById('loginModal').classList.toggle('active'); }
+
+        // 7. Auth Logic
+        function attemptLogin() {
+            const u = document.getElementById('userInput').value.toLowerCase().trim();
+            const p = document.getElementById('passInput').value.trim();
+            if (u==='student' && p==='123') window.location.href = 'student.html';
+            else if (u==='doctor' && p==='123') window.location.href = 'dashboard.html';
+            else if (u==='qa' && p==='123') window.location.href = 'qa_dashboard.html';
+            else alert("Access Denied.");
+        }
+
+        // 8. FAQ
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
